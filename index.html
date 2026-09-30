@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="RailConnect - Professional Railway Reservation System">
+
+    <title>RailConnect | Railway Reservation System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">🚆</span>
+                <span>Rail<span>Connect</span></span>
+            </a>
+
+            <nav class="nav-menu">
+
+                <a href="#home" class="active">
+                    Home
+                </a>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="login-btn" onclick="openLogin()">
+                    Login
+                </button>
+
+                <button class="register-btn" onclick="openRegister()">
+                    Register
+                </button>
+
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <span>●</span>
+                        SMART • FAST • SECURE
+                    </div>
+
+                    <h1>
+                        Your Journey
+                        <br>
+                        <span>Starts Here.</span>
+                    </h1>
+
+                    <p>
+                        Search trains, check seat availability,
+                        reserve your ticket and travel with confidence.
+                    </p>
+
+                </div>
+
+
+                <!-- SEARCH BOX -->
+
+                <div class="search-card">
+
+                    <div class="search-header">
+
+                        <div>
+                            <span class="small-label">
+                                RAILWAY RESERVATION
+                            </span>
+
+                            <h2>
+                                Find Your Train
+                            </h2>
+                        </div>
+
+                        <div class="train-icon">
+                            🚆
+                        </div>
+
+                    </div>
+
+
+                    <form id="searchForm" class="search-form">
+
+                        <div class="trip-type">
+
+                            <label>
+                                <input type="radio" name="trip" value="oneway" checked>
+
+                                <span>
+                                    One Way
+                                </span>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="trip" value="roundtrip">
+
+                                <span>
+                                    Round Trip
+                                </span>
+                            </label>
+
+                        </div>
+
+
+                        <div class="location-row">
+
+                            <!-- FROM -->
+
+                            <div class="input-group">
+
+                                <label for="from">
+                                    From
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        📍
+                                    </span>
+
+                                    <input type="text" id="from" placeholder="Departure station" autocomplete="off"
+                                        required>
+
+                                </div>
+
+                                <div class="suggestions" id="fromSuggestions"></div>
+
+                            </div>
+
+
+                            <!-- SWAP -->
+
+                            <button type="button" class="swap-btn" id="swapBtn" title="Swap stations">
+                                ⇄
+                            </button>
+
+
+                            <!-- TO -->
+
+                            <div class="input-group">
+
+                                <label for="to">
+                                    To
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        🎯
+                                    </span>
+
+                                    <input type="text" id="to" placeholder="Arrival station" autocomplete="off"
+                                        required>
+
+                                </div>
+
+                                <div class="suggestions" id="toSuggestions"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="details-row">
+
+                            <!-- DATE -->
+
+                            <div class="input-group">
+
+                                <label for="journeyDate">
+                                    Journey Date
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        📅
+                                    </span>
+
+                                    <input type="date" id="journeyDate" required>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CLASS -->
+
+                            <div class="input-group">
+
+                                <label for="travelClass">
+                                    Class
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        💺
+                                    </span>
+
+                                    <select id="travelClass">
+
+                                        <option value="SL">
+                                            Sleeper (SL)
+                                        </option>
+
+                                        <option value="3A">
+                                            AC 3 Tier (3A)
+                                        </option>
+
+                                        <option value="2A">
+                                            AC 2 Tier (2A)
+                                        </option>
+
+                                        <option value="1A">
+                                            AC First Class (1A)
+                                        </option>
+
+                                        <option value="CC">
+                                            Chair Car (CC)
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PASSENGERS -->
+
+                            <div class="input-group">
+
+                                <label for="passengers">
+                                    Passengers
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        👤
+                                    </span>
+
+                                    <select id="passengers">
+
+                                        <option value="1">
+                                            1 Passenger
+                                        </option>
+
+                                        <option value="2">
+                                            2 Passengers
+                                        </option>
+
+                                        <option value="3">
+                                            3 Passengers
+                                        </option>
+
+                                        <option value="4">
+                                            4 Passengers
+                                        </option>
+
+                                        <option value="5">
+                                            5 Passengers
+                                        </option>
+
+                                        <option value="6">
+                                            6 Passengers
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="search-btn">
+
+                            <span>
+                                🔎
+                            </span>
+
+                            Search Trains
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+
+        <section class="features-section" id="services">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span>
+                        WHY CHOOSE RAILCONNECT
+                    </span>
+
+                    <h2>
+                        Everything You Need
+                        <br>
+                        For Your Journey
+                    </h2>
+
+                    <p>
+                        A simple and reliable way to plan,
+                        book and manage your railway journey.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon blue">
+                            🔎
+                        </div>
+
+                        <h3>
+                            Easy Train Search
+                        </h3>
+
+                        <p>
+                            Search trains by station,
+                            date and travel class in seconds.
+                        </p>
+
+                        <a href="#">
+                            Explore →
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon orange">
+                            🎫
+                        </div>
+
+                        <h3>
+                            Quick Reservation
+                        </h3>
+
+                        <p>
+                            Book your seats through a
+                            simple and user-friendly process.
+                        </p>
+
+                        <a href="#">
+                            Book Now →
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon green">
+                            🔒
+                        </div>
+
+                        <h3>
+                            Secure Payments
+                        </h3>
+
+                        <p>
+                            Your account and booking
+                            information are protected.
+                        </p>
+
+                        <a href="#">
+                            Learn More →
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon purple">
+                            📱
+                        </div>
+
+                        <h3>
+                            Manage Bookings
+                        </h3>
+
+                        <p>
+                            View your PNR, tickets and
+                            booking history from one place.
+                        </p>
+
+                        <a href="#">
+                            My Bookings →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= POPULAR ROUTES ================= -->
+
+        <section class="routes-section">
+
+            <div class="container">
+
+                <div class="section-heading center">
+
+                    <span>
+                        POPULAR ROUTES
+                    </span>
+
+                    <h2>
+                        Travel Across India
+                    </h2>
+
+                    <p>
+                        Discover some of the most popular
+                        railway routes.
+                    </p>
+
+                </div>
+
+
+                <div class="routes-grid">
+
+                    <div class="route-card" onclick="selectRoute('Mumbai', 'Delhi')">
+
+                        <div class="route-top">
+                            <span>
+                                Mumbai
+                            </span>
+
+                            <span>
+                                →
+                            </span>
+
+                            <span>
+                                Delhi
+                            </span>
+                        </div>
+
+                        <div class="route-bottom">
+                            <span>
+                                Mumbai Central
+                            </span>
+
+                            <span>
+                                New Delhi
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="route-card" onclick="selectRoute('Mumbai', 'Pune')">
+
+                        <div class="route-top">
+                            <span>
+                                Mumbai
+                            </span>
+
+                            <span>
+                                →
+                            </span>
+
+                            <span>
+                                Pune
+                            </span>
+                        </div>
+
+                        <div class="route-bottom">
+                            <span>
+                                Dadar
+                            </span>
+
+                            <span>
+                                Pune Junction
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="route-card" onclick="selectRoute('Delhi', 'Chandigarh')">
+
+                        <div class="route-top">
+                            <span>
+                                Delhi
+                            </span>
+
+                            <span>
+                                →
+                            </span>
+
+                            <span>
+                                Chandigarh
+                            </span>
+                        </div>
+
+                        <div class="route-bottom">
+                            <span>
+                                New Delhi
+                            </span>
+
+                            <span>
+                                Chandigarh
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="route-card" onclick="selectRoute('Mumbai', 'Kolkata')">
+
+                        <div class="route-top">
+                            <span>
+                                Mumbai
+                            </span>
+
+                            <span>
+                                →
+                            </span>
+
+                            <span>
+                                Kolkata
+                            </span>
+                        </div>
+
+                        <div class="route-bottom">
+                            <span>
+                                Mumbai Central
+                            </span>
+
+                            <span>
+                                Howrah
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section class="about-section" id="about">
+
+            <div class="container about-container">
+
+                <div class="about-image">
+
+                    <div class="about-image-content">
+
+                        <span>
+                            🚆
+                        </span>
+
+                        <strong>
+                            Your Journey,
+                            Our Priority
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="about-content">
+
+                    <span class="section-label">
+                        ABOUT RAILCONNECT
+                    </span>
+
+                    <h2>
+                        Making Railway
+                        Reservations Simple
+                    </h2>
+
+                    <p>
+                        RailConnect is designed to make
+                        railway travel planning easier,
+                        faster and more convenient.
+                    </p>
+
+                    <p>
+                        From finding the right train to
+                        managing your reservation, everything
+                        is available through one simple platform.
+                    </p>
+
+
+                    <div class="about-stats">
+
+                        <div>
+                            <strong>
+                                100+
+                            </strong>
+
+                            <span>
+                                Trains
+                            </span>
+                        </div>
+
+                        <div>
+                            <strong>
+                                50+
+                            </strong>
+
+                            <span>
+                                Stations
+                            </span>
+                        </div>
+
+                        <div>
+                            <strong>
+                                24/7
+                            </strong>
+
+                            <span>
+                                Support
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-container">
+
+                <div>
+
+                    <span>
+                        READY TO TRAVEL?
+                    </span>
+
+                    <h2>
+                        Book Your Next Journey Today.
+                    </h2>
+
+                </div>
+
+                <button class="cta-btn" onclick="scrollToSearch()">
+                    Search Trains →
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer" id="contact">
+
+        <div class="container footer-grid">
+
+            <div>
+
+                <a href="#" class="logo footer-logo">
+                    🚆 RailConnect
+                </a>
+
+                <p>
+                    A modern railway reservation
+                    platform designed for simple,
+                    secure and convenient travel.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    Help Center
+                </a>
+
+                <a href="#">
+                    Contact Us
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>
+                    📧 support@railconnect.com
+                </p>
+
+                <p>
+                    ☎ +91 1800 123 4567
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 RailConnect.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= LOGIN MODAL ================= -->
+
+    <div class="modal" id="loginModal">
+
+        <div class="modal-card">
+
+            <button class="modal-close" onclick="closeModals()">
+                ×
+            </button>
+
+            <div class="modal-icon">
+                🔐
+            </div>
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Login to manage your railway reservations.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+                </div>
+
+                <button class="search-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="modal-footer-text">
+                Don't have an account?
+                <button type="button" onclick="switchToRegister()">
+                    Register
+                </button>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= REGISTER MODAL ================= -->
+
+    <div class="modal" id="registerModal">
+
+        <div class="modal-card">
+
+            <button class="modal-close" onclick="closeModals()">
+                ×
+            </button>
+
+            <div class="modal-icon">
+                👤
+            </div>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Create your RailConnect account.
+            </p>
+
+            <form id="registerForm">
+
+                <div class="input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input type="text" id="registerName" placeholder="Your full name" required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input type="email" id="registerEmail" placeholder="you@example.com" required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input type="password" id="registerPassword" placeholder="Minimum 6 characters" minlength="6"
+                        required>
+
+                </div>
+
+                <button class="search-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="modal-footer-text">
+                Already have an account?
+                <button type="button" onclick="switchToLogin()">
+                    Login
+                </button>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
